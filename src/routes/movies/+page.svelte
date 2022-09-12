@@ -1,19 +1,22 @@
 <script>
-  export let data;
-	$: console.log(data);
+	export let data;
+	//$: console.log(data.movies.Search[0]);
+	//let firstMovie = data.movies.Search[0];
 </script>
 
-<main class="">
-    <div class="card w-96 bg-base-100 shadow-xl">
-        <figure>
-            <img src="https://placeimg.com/400/225/arch" alt="Shoes" />
-        </figure>
-        <div class="card-body">
-          <h2 class="card-title">Shoes!</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
-          <div class="card-actions justify-end">
-            <button class="btn btn-primary">Buy Now</button>
-          </div>
-        </div>
-      </div>
+<main class="flex flex-wrap justify-center">
+	{#each data.movies as movie}
+		<div class="card w-96 bg-base-100 shadow-xl m-4">
+			<figure>
+				<img src={movie.Poster} alt="Movie poster" />
+			</figure>
+			<div class="card-body">
+				<h2 class="card-title">{movie.Title}</h2>
+				<p>{movie.Year}</p>
+				<div class="card-actions justify-end">
+					<button class="btn btn-primary">Buy Now</button>
+				</div>
+			</div>
+		</div>
+	{/each}
 </main>
