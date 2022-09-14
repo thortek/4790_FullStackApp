@@ -11,5 +11,14 @@
         </a>
     <a href="/avatars" class="btn btn-ghost normal-case text-xl">Avatars</a>
     <a href="/movies" class="btn btn-ghost normal-case text-xl">Movies</a>
+    <a href="/dashboard" class="btn btn-ghost normal-case text-xl">Dashboard</a>
+    <a href="/aggregator" class="btn btn-ghost normal-case text-xl">News Aggregator</a>
+    </div>
+    <div>
+<!--         <form method="POST" action="/movies">
+            <div class="form-control">
+                <input type="search" name="searchTerms" placeholder="Movie Search"/>
+            </div>
+        </form> -->
     </div>
 </header>

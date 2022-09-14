@@ -9,7 +9,7 @@ export async function GET() {
         const omdb_response = await fetch(`https://www.omdbapi.com/?apikey=${OMDB_APIKEY}&s=${searchTerms}`)
         movieData = await omdb_response.json()
         allMovies = await getAllMovies(movieData, searchTerms)
-        console.log(allMovies)
+        //console.log(allMovies)
     } catch (err) {
         console.error(err)
     }
@@ -44,5 +44,5 @@ async function getAllMovies(pageOne, searchTerms) {
             console.error(err)
         }
     }
-    return allTheMovies
+    return allTheMovies.filter(movie => (movie.Type === 'movie' && movie.Poster !== 'N/A'))
 }
