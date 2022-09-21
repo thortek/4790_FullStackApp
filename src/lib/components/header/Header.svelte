@@ -3,7 +3,7 @@
 </script>
 
 <header class="navbar bg-base-100">
-	<div>
+	<div class="flex-1">
 		<a href="/" class="btn btn-ghost">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +29,7 @@
 		<form method="POST" action="/movies" use:enhance>
 			<div class="form-control">
 				<input
-					class="input input-bordered input-lg"
+					class="input input-bordered input-lg w-80"
 					type="search"
 					name="searchTerms"
 					placeholder="Movie Search"

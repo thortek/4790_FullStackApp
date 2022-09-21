@@ -11,6 +11,7 @@
 	{#if !form}
 		<div class="card">
 			<div class="card-body">
+				<!-- <img src="/images/adventurer.svg" alt="Adventurer"/> -->
 				<h2 class="card-title">No movies loaded. Enter a valid movie title in the search box.</h2>
 			</div>
 		</div>
