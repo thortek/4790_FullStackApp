@@ -1,11 +1,11 @@
 <script>
-	import { enhance } from '$app/forms';
+	import { enhance } from '$app/forms'
 
     const credentials = {
         email: '',
         password: ''
     }
-    $: console.log(credentials)
+
 </script>
 
 <div class="hero min-h-screen bg-base-200">
