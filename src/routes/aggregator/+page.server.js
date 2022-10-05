@@ -1,4 +1,4 @@
-import { NEWS_APIKEY } from '$env/static/private'
+//import { NEWS_APIKEY } from '$lib/server/secrets.js'
 import { error } from '@sveltejs/kit'
 
 //https://api.thenewsapi.com/v1/news/headlines?locale=us&language=en&api_token=YOUR_API_TOKEN
