@@ -2,7 +2,7 @@
 	import '../app.css';
 </script>
 
-<div data-theme="light" class="h-screen">
+<div data-theme="aqua" class="h-screen">
 
 <slot />
 

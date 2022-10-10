@@ -7,7 +7,7 @@
 
 <div class="min-h-screen flex flex-wrap">
 	<progress class="progress w-56" value="0" max="100" />
-	<div class="carousel carousel-center p-4 max-h-96 space-x-4 bg-neutral rounded-box">
+	<div class="carousel carousel-center p-4 max-h-96 max-w-lg space-x-4 bg-neutral rounded-box m-1">
 		{#each pics as pic}
 			<div class="carousel-item">
 				<img class="rounded-box" src={pic.url} alt="Nasa pic" />
