@@ -1,8 +1,9 @@
 <script>
-	import '../app.css';
+	import '../app.css'
+	import { theme } from '$lib/stores/theme'
 </script>
 
-<div data-theme="light" class="h-screen">
+<div data-theme={$theme} class="h-screen">
 
 <slot />
 
