@@ -1,6 +1,22 @@
 <script>
+	import { enhance } from '$app/forms'
+	import MovieModal from '../../lib/components/MovieModal/MovieModal.svelte';
 	export let form, errors
 	//$: console.log(form)
+	
+	let showModal = false
+	let movieDetails = {}
+
+	function toggleModal() {
+		showModal = !showModal
+	}
+
+	const getMovieDetails = () => {
+		return async ({ result }) => {
+			movieDetails = await result.data
+			toggleModal()
+		}
+	}
 </script>
 
 {#if errors?.title}
@@ -19,7 +35,17 @@
 		{#each form as movie}
 			<div class="card w-96 bg-base-100 shadow-xl m-4">
 				<figure>
-					<img src={movie.Poster} alt="Movie poster" />
+					<form id="posterForm" method="POST" action="?/details" use:enhance={getMovieDetails}>
+						<input
+							type="image"
+							name="movieID"
+							value={movie.imdbID}
+							id="posterMovieID"
+							src={movie.Poster}
+							alt="Submit"
+						/>
+						<!-- <img src={movie.Poster} alt="Movie poster" /> -->
+					</form>
 				</figure>
 				<div class="card-body">
 					<h2 class="card-title">{movie.Title}</h2>
@@ -31,4 +57,5 @@
 			</div>
 		{/each}
 	{/if}
+	<MovieModal {movieDetails} {showModal} {toggleModal}/>
 </main>
