@@ -1,4 +1,5 @@
 import { invalid, redirect } from '@sveltejs/kit'
+// import store for user
 
 /** @type {import('./$types').Actions} */
 export const actions = {
@@ -15,5 +16,9 @@ export const actions = {
         
 		throw redirect(303, '/dashboard');
 		
+    },
+    signup: async ({ request }) => {
+        const data = await request.formData()
+        // set the user store's properties here
     }
 }
