@@ -11,7 +11,7 @@
 <div class="hero min-h-screen bg-base-200">
 	<div class="hero-content text-center">
 		<div class="card shadow-xl bg-slate-400">
-			<form class="card-body" method="POST" action="?/login" use:enhance>
+			<form class="card-body" method="POST" action="/auth?/login" use:enhance>
 				<div class="form-control">
                     <h1 class="text-4xl font-bold m-4 text-primary-content">Log in</h1>
                     <h4 class="m-2 text-primary-focus">Sign in to my demo app</h4>

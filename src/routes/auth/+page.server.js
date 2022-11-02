@@ -19,6 +19,8 @@ export const actions = {
     },
     signup: async ({ request }) => {
         const data = await request.formData()
-        // set the user store's properties here
+        // eventually connect with online identity provider
+        throw redirect(307, '/auth/login')
+
     }
 }
