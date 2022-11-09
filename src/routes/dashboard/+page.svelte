@@ -8,6 +8,7 @@
 	import { tweened } from 'svelte/motion'
 	import { cubicOut } from 'svelte/easing'
 	import { fly } from 'svelte/transition'
+	import { flip } from 'svelte/animate'
 
 	export let data
 	export const prerender = true
@@ -26,6 +27,16 @@
 	const handleClick = async () => {
 		await progress.set(Number.parseInt(faker.finance.amount(1, 100, 0)))
 		finalProgress = $progress
+	}
+
+	let stepList = [{id: faker.random.numeric(16), text: faker.company.bsBuzz()}]
+	
+	const addStep = () => {
+		const step = {
+			id: faker.random.numeric(16),
+			text: faker.company.bsBuzz()
+		}
+		stepList = [step, ...stepList]
 	}
 </script>
 
@@ -54,10 +65,25 @@
 	<div class="w-96">
 		<Doughnut class="p-16" data={donutData} />
 	</div>
-	<div>
+	<div class="h-fit">
+		<div class="m-4">
+			<button class="btn" on:click={addStep}>Add Step</button>
+
+			<ul class="steps steps-vertical lg:steps-horizontal">
+				{#each stepList as step (step.id)}
+					<li class="step step-primary" animate:flip="{{duration: 200}}">{step.text}</li>
+				{/each}
+			</ul>
+			<ul>
+				{#each stepList as step (step.id)}
+					<li class="bg-green-700 rounded-md w-48 p-1 text-center m-1" animate:flip>{step.text}</li>
+				{/each}
+			</ul>
+		</div>
 		<!-- Stats element begins here-->
 		<Stats />
-		<button class="btn" on:click={() => (visible = !visible)}>Show Financial Performance</button>
+		<button class="btn" on:click={() => (visible = !visible)}
+			>{visible ? 'Hide' : 'Show'} Financial Performance</button>
 		{#if visible}
 			<div class="flex bg-slate-200 rounded-xl m-4" transition:fly={{ x: 1200, duration: 2000 }}>
 				<div>
