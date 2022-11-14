@@ -1,3 +1,6 @@
+### Advanced Styling
+I used the class directive in my [Movie modal example.](https://github.com/thortek/3790_ExampleProject/blob/master/src/lib/components/MovieModal/MovieModal.svelte)
+
 # create-svelte
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
