@@ -1,5 +1,5 @@
 ### Advanced Styling
-I used the class directive in my [Movie modal example.](https://github.com/thortek/3790_ExampleProject/blob/master/src/lib/components/MovieModal/MovieModal.svelte)
+I used the class directive in my [`Movie modal example`.](https://github.com/thortek/3790_ExampleProject/blob/master/src/lib/components/MovieModal/MovieModal.svelte)
 
 # create-svelte
 

@@ -1,7 +1,7 @@
 <script>
-	import { enhance } from '$app/forms'
 	import { user } from '$lib/stores/user.js'
-
+	import { enhance } from '$app/forms'
+	
     const credentials = {
 		firstName: '',
 		lastName: '',
