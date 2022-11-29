@@ -6,11 +6,13 @@
 	let themeOptions = ['light', 'dark', 'cupcake', 'aqua', 'dracula', 'winter']
 
 	let selectedTheme
+	let localUser = JSON.parse($user)
 
 	$: if (selectedTheme && selectedTheme !== 'Theme') $theme = selectedTheme
 
 	function logout() {
-		console.log(`User ${$user.firstName} ${$user.lastName} has logged out.`)
+
+		console.log(`User ${localUser.firstName}`)
 	}
 </script>
 
@@ -57,8 +59,8 @@
 		<ul
 			tabindex="0"
 			class="mt-3 p-2 dropdown-content bg-base-100 menu menu-compact shadow rounded-box w-36">
-			{#if $user.firstName}
-				<li>Welcome {$user.firstName}!</li>
+			{#if localUser.firstName}
+				<li>Welcome {localUser.firstName}!</li>
 			{/if}
 			<li><a>Profile</a></li>
 			<li><a>Settings</a></li>

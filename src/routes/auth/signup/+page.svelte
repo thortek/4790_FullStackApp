@@ -10,7 +10,7 @@
 
 	const storeUserDetails = () => {
 		return async ({ update }) => {
-			$user = credentials
+			$user = JSON.stringify(credentials)
 			update()
 		}
 	}
