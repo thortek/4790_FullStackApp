@@ -7,12 +7,13 @@
 
 	let selectedTheme
 	let localUser = JSON.parse($user)
+	console.log(localUser)
 
 	$: if (selectedTheme && selectedTheme !== 'Theme') $theme = selectedTheme
 
 	function logout() {
 
-		console.log(`User ${localUser.firstName}`)
+		console.log(`Logging out user: ${localUser.firstName} ${localUser.lastName}`)
 	}
 </script>
 
