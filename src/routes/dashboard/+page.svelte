@@ -27,7 +27,6 @@
 	const handleClick = async () => {
 		await progress.set(Number.parseInt(faker.finance.amount(1, 100, 0)))
 		finalProgress = $progress
-		throw Error
 	}
 
 	let stepList = [{id: faker.random.numeric(16), text: faker.company.bsBuzz()}]
