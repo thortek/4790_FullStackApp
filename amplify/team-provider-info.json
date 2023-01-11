@@ -10,6 +10,11 @@
       "StackName": "amplify-4790backend-staging-220634",
       "StackId": "arn:aws:cloudformation:us-west-2:904739415027:stack/amplify-4790backend-staging-220634/e1ab2910-9069-11ed-a30f-02199641a49b",
       "AmplifyAppId": "d1yxpnooq62isg"
+    },
+    "categories": {
+      "auth": {
+        "4790backend2a543687": {}
+      }
     }
   }
 }
