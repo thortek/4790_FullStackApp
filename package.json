@@ -30,6 +30,7 @@
 		"chart.js": "^3.9.1",
 		"daisyui": "^2.38.1",
 		"sanitize-html": "^2.7.2",
-		"svelte-chartjs": "^3.0.1"
+		"svelte-chartjs": "^3.0.1",
+		"svelte-preprocess": "^5.0.0"
 	}
 }
