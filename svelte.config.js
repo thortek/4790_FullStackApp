@@ -8,6 +8,7 @@ const config = {
 		adapter: adapter({
 			autoDeploy: true,
 			FQDN: 'www.thoranderson.site',
+			stackName: 'AWSAdapterStack-Default' // need to revisit this config issue later
 		})
 	},
 
