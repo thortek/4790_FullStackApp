@@ -1,26 +1,43 @@
 <script>
-	import { user } from '$lib/stores/user.js'
-	import { enhance } from '$app/forms'
+
+	import { Auth } from 'aws-amplify'
 	
     const credentials = {
 		firstName: '',
 		lastName: '',
-        email: ''
+        email: '',
+		password: ''
     }
 
-	const storeUserDetails = () => {
-		return async ({ update }) => {
-			$user = JSON.stringify(credentials)
-			update()
-		}
+	const handleSubmit = async () => {
+		console.log('About to submit signup data...')
+		try {
+        const { user } = await Auth.signUp({
+            username: credentials.email,
+            password: credentials.password,
+            attributes: {
+                name: credentials.firstName,          // optional
+                family_name: credentials.lastName,   // optional - E.164 number convention
+                email: credentials.email // other custom attributes 
+            },
+            autoSignIn: { // optional - enables auto sign in after user is confirmed
+                enabled: true,
+            }
+        })
+        console.log(user)
+		// go to verification route on success
+    } catch (error) {
+        console.log('error signing up:', error)
+    }
 	}
+
 
 </script>
 
 <div class="hero min-h-screen bg-base-200">
 	<div class="hero-content text-center">
 		<div class="card shadow-xl bg-slate-400">
-			<form class="card-body" method="POST" action="/auth?/signup" use:enhance={storeUserDetails}>
+			<form class="card-body" on:submit|preventDefault={handleSubmit}>
 				<div class="form-control">
                     <h1 class="text-4xl font-bold m-4">Sign up</h1>
                     <h4 class="m-2">Sign up to experience my demo app</h4>
@@ -39,7 +56,7 @@
                         bind:value={credentials.email}
 					/>
                     <label class="label" for="password">Password</label>
-                    <input class="input input-bordered input-lg w-96" type="password" name="password" placeholder="Password" required autocomplete="password" minlength="8" maxlength="80"/>
+                    <input class="input input-bordered input-lg w-96" type="password" name="password" placeholder="Password" required autocomplete="password" minlength="8" maxlength="80" bind:value={credentials.password}/>
                     <button class="btn btn-primary btn-lg mt-8" type="submit">Sign up</button>
 				</div>
 			</form>
