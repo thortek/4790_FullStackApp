@@ -4,13 +4,21 @@
 
 	const handleSubmit = async () => {
 		console.log('About to verify code that was sent by email... ', code)
+
+        /* try {
+            const currentUser = await Auth.currentUserPoolUser()
+            console.log(currentUser)
+        } catch(err) {
+            console.log(err)
+        } */
 		try {
-			const { attributes } = await Auth.currentAuthenticatedUser()
+			const attributes = await Auth.currentUserInfo({ bypassCache: true })
 			console.log(attributes)
 		} catch (err) {
 			console.log('error getting currentAuthenticatedUser... ', err)
 		}
-		/*  		try {
+        /*
+		  		try {
 			await Auth.confirmSignUp('ta.anderson@gmail.com', code.toString())
 		} catch (error) {
 			console.log('error confirming sign up', error)
