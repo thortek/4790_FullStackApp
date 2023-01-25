@@ -1,19 +1,25 @@
 <script>
 	import { enhance } from '$app/forms'
 	import { theme } from '$lib/stores/theme'
-	import { user } from '$lib/stores/user'
+	import { Auth } from 'aws-amplify'
 
 	let themeOptions = ['light', 'dark', 'cupcake', 'aqua', 'dracula', 'winter']
 
 	let selectedTheme
-	let localUser = JSON.parse($user)
-	console.log(localUser)
+	//let localUser = JSON.parse($user)
+	//console.log(localUser)
 
 	$: if (selectedTheme && selectedTheme !== 'Theme') $theme = selectedTheme
 
-	function logout() {
+	let localUser
+	console.log('About to try and authenticate user...')
+	Auth.currentAuthenticatedUser()
+		.then((user) => (localUser = user))
+		.catch((err) => console.log('Checking for user... ', err))
 
-		console.log(`Logging out user: ${localUser.firstName} ${localUser.lastName}`)
+	function logout() {
+		console.log(localUser)
+		//console.log(`Logging out user: ${localUser.firstName} ${localUser.lastName}`)
 	}
 </script>
 
@@ -60,9 +66,9 @@
 		<ul
 			tabindex="0"
 			class="mt-3 p-2 dropdown-content bg-base-100 menu menu-compact shadow rounded-box w-36">
-<!-- 			{#if localUser.firstName}
-				<li>Welcome {localUser.firstName}!</li>
-			{/if} -->
+			{#if localUser.attributes.name}
+				<li>Welcome {localUser.attributes.name}!</li>
+			{/if}
 			<li><a>Profile</a></li>
 			<li><a>Settings</a></li>
 			<li>

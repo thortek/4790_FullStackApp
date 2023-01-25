@@ -1,12 +1,20 @@
 <script>
 
 	import { Auth } from 'aws-amplify'
+    import { localUser } from '$lib/stores/localUser'
+    import { goto } from '$app/navigation'
 	
     const credentials = {
 		firstName: '',
 		lastName: '',
         email: '',
 		password: ''
+    }
+
+    let formError = {
+        emailTaken: false,
+        invalidPassword: false,
+        errorMessage: ''
     }
 
 	const handleSubmit = async () => {
@@ -25,9 +33,18 @@
             }
         })
         console.log(user)
+        $localUser = credentials.email
 		// go to verification route on success
+        goto('/auth/verify')
     } catch (error) {
         console.log('error signing up:', error)
+        formError.errorMessage = error.message
+        if (error.code === 'UsernameExistsException') {
+            formError.emailTaken = true
+        }
+        if (error.code === 'InvalidPasswordException') {
+            formError.invalidPassword = true
+        }
     }
 	}
 
@@ -55,8 +72,10 @@
                         autocomplete="email"
                         bind:value={credentials.email}
 					/>
+                    {#if formError.emailTaken}<p class="text-red-800">{formError.errorMessage}</p>{/if}
                     <label class="label" for="password">Password</label>
                     <input class="input input-bordered input-lg w-96" type="password" name="password" placeholder="Password" required autocomplete="password" minlength="8" maxlength="80" bind:value={credentials.password}/>
+                    {#if formError.invalidPassword}<p class="text-red-800">{formError.errorMessage}</p>{/if}
                     <button class="btn btn-primary btn-lg mt-8" type="submit">Sign up</button>
 				</div>
 			</form>

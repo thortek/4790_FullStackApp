@@ -8,7 +8,8 @@ const config = {
 		alias: {
 			'./runtimeConfig': './runtimeConfig.browser'
 		}
-	}
+	},
+	server: {port: 5100}
 };
 
 export default config;

@@ -1,28 +1,22 @@
 <script>
 	import { Auth } from 'aws-amplify'
+	import { localUser } from '$lib/stores/localUser'
+	import { goto } from '$app/navigation'
+
 	let code
 
 	const handleSubmit = async () => {
 		console.log('About to verify code that was sent by email... ', code)
-
-        /* try {
-            const currentUser = await Auth.currentUserPoolUser()
-            console.log(currentUser)
-        } catch(err) {
-            console.log(err)
-        } */
-		try {
-			const attributes = await Auth.currentUserInfo({ bypassCache: true })
-			console.log(attributes)
-		} catch (err) {
-			console.log('error getting currentAuthenticatedUser... ', err)
+		if ($localUser) {
+			try {
+				await Auth.confirmSignUp($localUser, code.toString())
+				goto('/')
+			} catch (error) {
+				console.log('error confirming sign up', error)
+			}
+		} else {
+			console.error('No email found for local user')
 		}
-        /*
-		  		try {
-			await Auth.confirmSignUp('ta.anderson@gmail.com', code.toString())
-		} catch (error) {
-			console.log('error confirming sign up', error)
-		} */
 	}
 </script>
 
