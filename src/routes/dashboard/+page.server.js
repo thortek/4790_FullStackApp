@@ -3,7 +3,8 @@ import { NASA_APIKEY } from '$env/static/private'
 export async function load() {
     try {
         const nasa_response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${NASA_APIKEY}&count=6`)
-        return await nasa_response.json()
+        const pic_data = await nasa_response.json()
+        return { nasa_pics: pic_data}
     } catch (err) {
         console.error(err)
     }

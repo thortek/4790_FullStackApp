@@ -13,7 +13,7 @@
 	export let data
 	export const prerender = true
 	// $: console.log(Object.values(data))
-	let pics = Object.values(data)
+	let pics = data.nasa_pics
 	const companyName = faker.company.name()
 
 	const progress = tweened(Number.parseInt(faker.finance.amount(1, 100, 0)), {
