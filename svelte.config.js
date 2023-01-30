@@ -1,17 +1,18 @@
-import { adapter } from 'sveltekit-adapter-aws';
+import adapter from '@sveltejs/adapter-static'
 import preprocess from 'svelte-preprocess'
 
-/** @type {import('@sveltejs/kit').Config} */
+// /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	preprocess: preprocess(),
 	kit: {
 		adapter: adapter({
-			autoDeploy: true,
-			FQDN: 'www.thoranderson.site',
-			stackName: 'AWSAdapterStack-Default' // need to revisit this config issue later
+			fallback: 'index.html'
 		})
 	},
+	preprocess: [
+		preprocess({
+			postcss: true
+		})
+	]
+}
 
-};
-
-export default config;
+export default config
