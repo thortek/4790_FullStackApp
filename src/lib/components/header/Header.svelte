@@ -2,6 +2,7 @@
 	import { enhance } from '$app/forms'
 	import { theme } from '$lib/stores/theme'
 	import { Auth } from 'aws-amplify'
+	import { goto } from '$app/navigation'
 
 	let themeOptions = ['light', 'dark', 'cupcake', 'aqua', 'dracula', 'winter']
 
@@ -17,9 +18,13 @@
 		.then((user) => (localUser = user))
 		.catch((err) => console.log('Checking for user... ', err))
 
-	function logout() {
-		console.log(localUser)
-		//console.log(`Logging out user: ${localUser.firstName} ${localUser.lastName}`)
+	async function logout() {
+		try {
+			await Auth.signOut()
+			goto('/')
+		} catch (error) {
+			console.log('error signing out: ', error)
+		}
 	}
 </script>
 
