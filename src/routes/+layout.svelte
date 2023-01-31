@@ -3,7 +3,7 @@
 	import { theme } from '$lib/stores/theme'
 	import { Amplify } from 'aws-amplify'
 	import awsconfig from '../aws-exports'
-	Amplify.configure(awsconfig)
+	Amplify.configure({...awsconfig, ssr: true})
 </script>
 
 <div data-theme={$theme}>
