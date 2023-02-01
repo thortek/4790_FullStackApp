@@ -6,6 +6,9 @@ node_modules
 .env
 .env.*
 !.env.example
+.vercel
+.output
+vite.config.js.timestamp-*
 
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend
