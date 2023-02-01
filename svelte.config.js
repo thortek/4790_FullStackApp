@@ -1,7 +1,22 @@
-import adapter from '@sveltejs/adapter-static'
+import { adapter } from 'sveltekit-adapter-aws';
+import preprocess from 'svelte-preprocess';
+
+export default {
+  preprocess: preprocess(),
+  kit: {
+    adapter: adapter({
+      autoDeploy: true,
+    }),
+  },
+}
+
+
+
+
+/* import adapter from '@sveltejs/adapter-static'
 import preprocess from 'svelte-preprocess'
 
-// /** @type {import('@sveltejs/kit').Config} */
+
 const config = {
 	kit: {
 		adapter: adapter({
@@ -15,4 +30,4 @@ const config = {
 	]
 }
 
-export default config
+export default config */

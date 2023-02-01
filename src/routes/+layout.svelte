@@ -5,7 +5,7 @@
 	import awsconfig from '../aws-exports'
 	Amplify.configure(awsconfig)
 
-	export const prerender = true
+	//export const prerender = true
 </script>
 
 <div data-theme={$theme}>
