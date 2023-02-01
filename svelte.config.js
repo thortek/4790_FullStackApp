@@ -1,13 +1,7 @@
-import adapter from '@sveltejs/adapter-node'
-//import preprocess from 'svelte-preprocess'
+import adapter from '@sveltejs/adapter-static'
+import preprocess from 'svelte-preprocess'
 
 const config = {
-	kit: {
-		adapter: adapter()
-	}
-}
-
-/* const config = {
 	kit: {
 		adapter: adapter({
 			fallback: 'index.html'
@@ -18,7 +12,7 @@ const config = {
 			postcss: true
 		})
 	]
-} */
+}
 
 
 export default config
