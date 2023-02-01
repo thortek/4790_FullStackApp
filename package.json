@@ -10,6 +10,7 @@
 		"format": "prettier --write ."
 	},
 	"devDependencies": {
+		"@sveltejs/adapter-node": "^1.1.4",
 		"@sveltejs/kit": "next",
 		"autoprefixer": "^10.4.8",
 		"eslint": "^8.16.0",
