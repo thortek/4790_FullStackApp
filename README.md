@@ -2,6 +2,8 @@
 
 ## Using AWS Hosting now
 
+Just added rewrites and redirects to try and get working deployment.
+
 ### Advanced Styling
 I used the class directive in my [`Movie modal example`.](https://github.com/thortek/3790_ExampleProject/blob/master/src/lib/components/MovieModal/MovieModal.svelte)
 
