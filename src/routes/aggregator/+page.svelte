@@ -1,5 +1,5 @@
 <script>
-	export let data, errors
+	export let data
 	//$: console.log(data.topStories)
 
 	let storyContent = ''

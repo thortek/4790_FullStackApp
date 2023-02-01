@@ -74,8 +74,8 @@
 			{#if localUser}
 				<li>Welcome {localUser.attributes.name}!</li>
 			{/if}
-			<li><a>Profile</a></li>
-			<li><a>Settings</a></li>
+			<li><a href="/user/profile">Profile</a></li>
+			<li><a href="/user/settings">Settings</a></li>
 			<li>
 				<select bind:value={selectedTheme} class="select w-full max-x-xs">
 					<option disabled selected>Theme</option>
