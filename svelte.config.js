@@ -1,11 +1,10 @@
-import adapter from '@sveltejs/adapter-static'
+
+import adapter from '@sveltejs/adapter-vercel';
 import preprocess from 'svelte-preprocess'
 
 const config = {
 	kit: {
-		adapter: adapter({
-			fallback: 'index.html'
-		})
+		adapter: adapter()
 	},
 	preprocess: [
 		preprocess({
