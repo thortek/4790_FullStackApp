@@ -11,7 +11,7 @@
 		try {
 			const user = await Auth.signIn(credentials.email, credentials.password)
 			console.log('Login appears to have worked...', user)
-			goto('/dashboard')
+			goto('/avatars')
 		} catch (err) {
 			console.log(err)
 		}
