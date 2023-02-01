@@ -5,7 +5,9 @@ export default {
   preprocess: preprocess(),
   kit: {
     adapter: adapter({
-      autoDeploy: true,
+		autoDeploy: true,
+		FQDN: 'main.d1yxpnooq62isg.amplifyapp.com',
+		stackName: 'amplify-4790backend-staging-220634-auth4790backend2a543687-2T7CUMC3CT2R'
     }),
   },
 }
