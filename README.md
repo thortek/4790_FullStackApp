@@ -1,7 +1,7 @@
 # 4790_FullStackApp
 
 ## Vercel hosting is working
-[4790 FullStack App](https://4790-full-stack-app.vercel.app/)
+[4790 FullStack App](https://4790-full-stack-app.vercel.app/) But only when using the Vercel CLI to push to production!
 
 
 ### Advanced Styling
