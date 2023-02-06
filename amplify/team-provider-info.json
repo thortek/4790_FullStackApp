@@ -13,7 +13,8 @@
     },
     "categories": {
       "auth": {
-        "4790backend2a543687": {}
+        "4790backend2a543687": {},
+        "userPoolGroups": {}
       },
       "api": {
         "4790backend": {}
