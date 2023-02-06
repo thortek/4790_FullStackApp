@@ -1,8 +1,12 @@
-import adapter from '@sveltejs/adapter-auto'
+import { adapter } from 'sveltekit-adapter-aws'
+import preprocess from 'svelte-preprocess'
 
 const config = {
+	preprocess: preprocess(),
 	kit: {
-		adapter: adapter()
+		adapter: adapter(
+			{autoDeploy: true}
+		)
 	}
 }
 
