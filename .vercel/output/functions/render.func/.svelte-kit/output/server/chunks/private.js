@@ -1,8 +1,0 @@
-const OMDB_APIKEY = "e38dd421";
-const NEWS_APIKEY = "4e47a48a57ff4566a1b05e83ae007e4d";
-const NASA_APIKEY = "jA8i7yzZJ35sqXJv0FwTH6vGvcP0lJE1nyKjUWUJ";
-export {
-  NEWS_APIKEY as N,
-  OMDB_APIKEY as O,
-  NASA_APIKEY as a
-};
