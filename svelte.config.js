@@ -6,9 +6,8 @@ const config = {
 	kit: {
 		adapter: adapter(
 			{
-				autoDeploy: true,
-				FQDN: 'deploy-amplify.d1yxpnooq62isg.amplifyapp.com',
-			stackName: 'amplify-4790backend-staging-220634'}
+				autoDeploy: true
+			}
 		)
 	}
 }
