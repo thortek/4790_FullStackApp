@@ -1,5 +1,5 @@
 import { DataStore } from "aws-amplify"
-import { Post } from "../../models"
+//import { Post } from "../../models"
 import { Amplify } from "aws-amplify"
 import awsconfig from "../../aws-exports"
 

@@ -1,25 +1,12 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getBlog = /* GraphQL */ `
-  query GetBlog($id: ID!) {
-    getBlog(id: $id) {
+export const getSkill = /* GraphQL */ `
+  query GetSkill($id: ID!) {
+    getSkill(id: $id) {
       id
+      sourcedId
       name
-      posts {
-        items {
-          id
-          title
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          blogPostsId
-        }
-        nextToken
-        startedAt
-      }
       createdAt
       updatedAt
       _version
@@ -28,20 +15,17 @@ export const getBlog = /* GraphQL */ `
     }
   }
 `;
-export const listBlogs = /* GraphQL */ `
-  query ListBlogs(
-    $filter: ModelBlogFilterInput
+export const listSkills = /* GraphQL */ `
+  query ListSkills(
+    $filter: ModelSkillFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listBlogs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listSkills(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        sourcedId
         name
-        posts {
-          nextToken
-          startedAt
-        }
         createdAt
         updatedAt
         _version
@@ -53,14 +37,14 @@ export const listBlogs = /* GraphQL */ `
     }
   }
 `;
-export const syncBlogs = /* GraphQL */ `
-  query SyncBlogs(
-    $filter: ModelBlogFilterInput
+export const syncSkills = /* GraphQL */ `
+  query SyncSkills(
+    $filter: ModelSkillFilterInput
     $limit: Int
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncBlogs(
+    syncSkills(
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -68,240 +52,13 @@ export const syncBlogs = /* GraphQL */ `
     ) {
       items {
         id
+        sourcedId
         name
-        posts {
-          nextToken
-          startedAt
-        }
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getPost = /* GraphQL */ `
-  query GetPost($id: ID!) {
-    getPost(id: $id) {
-      id
-      title
-      blog {
-        id
-        name
-        posts {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      comments {
-        items {
-          id
-          content
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          postCommentsId
-        }
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      blogPostsId
-    }
-  }
-`;
-export const listPosts = /* GraphQL */ `
-  query ListPosts(
-    $filter: ModelPostFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        title
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        comments {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        blogPostsId
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncPosts = /* GraphQL */ `
-  query SyncPosts(
-    $filter: ModelPostFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncPosts(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        title
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        comments {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        blogPostsId
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getComment = /* GraphQL */ `
-  query GetComment($id: ID!) {
-    getComment(id: $id) {
-      id
-      post {
-        id
-        title
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        comments {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        blogPostsId
-      }
-      content
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      postCommentsId
-    }
-  }
-`;
-export const listComments = /* GraphQL */ `
-  query ListComments(
-    $filter: ModelCommentFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        post {
-          id
-          title
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          blogPostsId
-        }
-        content
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        postCommentsId
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncComments = /* GraphQL */ `
-  query SyncComments(
-    $filter: ModelCommentFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncComments(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        post {
-          id
-          title
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          blogPostsId
-        }
-        content
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        postCommentsId
       }
       nextToken
       startedAt

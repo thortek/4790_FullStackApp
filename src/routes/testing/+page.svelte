@@ -1,6 +1,6 @@
 <script>
 	import { DataStore, Predicates } from 'aws-amplify'
-    import { Post, PostStatus } from '../../models'
+    //import { Post, PostStatus } from '../../models'
 
 	export let data
 
