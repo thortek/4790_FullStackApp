@@ -7,6 +7,7 @@ export const getSkill = /* GraphQL */ `
       id
       sourcedId
       name
+      infoUrl
       createdAt
       updatedAt
       _version
@@ -26,6 +27,7 @@ export const listSkills = /* GraphQL */ `
         id
         sourcedId
         name
+        infoUrl
         createdAt
         updatedAt
         _version
@@ -54,6 +56,7 @@ export const syncSkills = /* GraphQL */ `
         id
         sourcedId
         name
+        infoUrl
         createdAt
         updatedAt
         _version

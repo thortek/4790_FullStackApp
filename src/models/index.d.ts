@@ -14,6 +14,7 @@ type EagerSkill = {
   readonly id: string;
   readonly sourcedId: string;
   readonly name: string;
+  readonly infoUrl: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -26,6 +27,7 @@ type LazySkill = {
   readonly id: string;
   readonly sourcedId: string;
   readonly name: string;
+  readonly infoUrl: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
