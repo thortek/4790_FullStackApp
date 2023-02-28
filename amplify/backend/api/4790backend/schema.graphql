@@ -6,6 +6,5 @@ type Skill @model {
   id: ID!
   sourcedId: String!
   name: String!
-  infoUrl: String!
 }
 

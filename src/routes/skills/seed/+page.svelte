@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte'
-	import { DataStore } from 'aws-amplify'
+	import { DataStore, Predicates } from 'aws-amplify'
 	import { Skill } from '../../../models'
 
 	export let data
@@ -51,45 +51,52 @@
 	} */
 
 	const findOrCreateSkill = async () => {
-/* 		const tempSkill = skills[0]
-		console.log(tempSkill)
-		await DataStore.save(
-				new Skill({
-					name: tempSkill.name,
-					sourcedId: tempSkill.id,
-					infoUrl: tempSkill.infoUrl,
-				})
-			) */
 		for (let skill of selectedSkills) {
-			console.log(skill)
-			const foundSkill = await DataStore.query(Skill, c => c.sourcedId('eq', skill.id))
-			console.log(foundSkill)
+			const foundSkill = await DataStore.query(Skill, (c) => c.sourcedId.eq(skill.id))
+			if (foundSkill.length > 0) {
+				console.log('skill found already in DataStore')
+			} else {
+				console.log('skill was not found in DataStore, adding it now')
+				await DataStore.save(
+					new Skill({
+						name: skill.name,
+						sourcedId: skill.id,
+					})
+				)
+			}
 		}
+	}
+
+	const deleteSelectedSkills = async () => {
+		for (let skill of selectedSkills) {
+			const skillToDelete = await DataStore.query(Skill, c => c.sourcedId.eq(skill.id))
+			console.log(skillToDelete)
+			await DataStore.delete(skillToDelete[0]) // delete the first item in the array
+		}
+	}
+	const deleteAllSkills = async () => {
+		await DataStore.delete(Skill, Predicates.ALL);
 	}
 </script>
 
+<div>
+	<button class="btn btn-primary m-2" class:btn-disabled="{selectedSkills.length === 0}" on:click={findOrCreateSkill}>Add Selected Items to DataStore</button>
+	<button class="btn btn-primary m-2" class:btn-disabled="{selectedSkills.length === 0}" on:click={deleteSelectedSkills}>Delete Selected Items</button>
+	<button class="btn btn-primary m-2" on:click={deleteAllSkills}>Delete all Items</button>
+</div>
 <table class="table w-full overflow-y-auto">
 	<thead>
 		<tr>
 			<th>
-				<div class="flex items-center">
-					<p>Select</p>
-					<button class="btn btn-primary mx-2" on:click={findOrCreateSkill}
-						>Add Items to DataStore</button>
-				</div>
+				<label>
+					<input type="checkbox" checked={allSelected} on:change={toggleAll} /> Select All ({selectedSkills.length}
+					/ {skills.length})</label>
 			</th>
 			<th class="text-left">Skill</th>
 			<th class="text-left">Id</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<td><label>
-				<input type="checkbox" checked={allSelected} on:click={toggleAll}/> Select All ({selectedSkills.length} / {skills.length})</label>
-				</td>
-			<td></td>
-			<td></td>
-		</tr>
 		{#each skills as skill}
 			<tr>
 				<td><input type="checkbox" bind:group={selectedSkills} value={skill} /></td>

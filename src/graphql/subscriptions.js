@@ -7,7 +7,6 @@ export const onCreateSkill = /* GraphQL */ `
       id
       sourcedId
       name
-      infoUrl
       createdAt
       updatedAt
       _version
@@ -22,7 +21,6 @@ export const onUpdateSkill = /* GraphQL */ `
       id
       sourcedId
       name
-      infoUrl
       createdAt
       updatedAt
       _version
@@ -37,7 +35,6 @@ export const onDeleteSkill = /* GraphQL */ `
       id
       sourcedId
       name
-      infoUrl
       createdAt
       updatedAt
       _version
