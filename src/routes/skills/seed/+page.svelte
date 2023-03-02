@@ -21,8 +21,8 @@
 	onMount(async () => {
 		if (!data) return
 		const params = new URLSearchParams()
-		params.append('limit', 100)
-		params.append('q', 'javascript')
+		params.append('limit', 1000)
+		//params.append('q', 'javascript')
 		const response = await fetch(
 			`https://emsiservices.com/skills/versions/latest/skills?${params}`,
 			{
@@ -52,6 +52,7 @@
 
 	const findOrCreateSkill = async () => {
 		for (let skill of selectedSkills) {
+			//const foundSkill = await DataStore.query(Skill, (c) => c.sourcedId('eq', skill.id))
 			const foundSkill = await DataStore.query(Skill, (c) => c.sourcedId.eq(skill.id))
 			if (foundSkill.length > 0) {
 				console.log('skill found already in DataStore')
@@ -75,7 +76,7 @@
 		}
 	}
 	const deleteAllSkills = async () => {
-		await DataStore.delete(Skill, Predicates.ALL);
+		await DataStore.delete(Skill, Predicates.ALL)
 	}
 </script>
 
