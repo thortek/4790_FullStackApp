@@ -1,4 +1,4 @@
-type Skill @model @auth(rules: [{allow: private, operations: [read, create]}, {allow: owner}, {allow: public}]) {
+type Skill @model @auth(rules: [{allow: private, operations: [read, create]}, {allow: owner}]) {
   id: ID!
   sourcedId: String!
   name: String!

@@ -1,9 +1,12 @@
 <script>
 	import '../app.css'
 	import { theme } from '$lib/stores/theme'
-	import { Amplify } from 'aws-amplify'
+	import { Amplify, AuthModeStrategyType } from 'aws-amplify'
 	import awsconfig from '../aws-exports'
-	Amplify.configure(awsconfig)
+	Amplify.configure({...awsconfig, DataStore: {
+		authModeStrategyType: AuthModeStrategyType.MULTI_AUTH
+	}
+	})
 
 </script>
 
