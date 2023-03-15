@@ -48,6 +48,9 @@
 		<a href="/movies" class="btn btn-ghost normal-case text-xl">Movies</a>
 		<a href="/dashboard" class="btn btn-ghost normal-case text-xl">Dashboard</a>
 		<a href="/aggregator" class="btn btn-ghost normal-case text-xl">News Aggregator</a>
+		<p>{#if localUser}
+			{localUser.attributes.email}
+		{/if}</p>
 	</div>
 	<div>
 		<form method="POST" action="/movies?/search" use:enhance>
