@@ -1,7 +1,7 @@
 <script>
 	import { enhance } from '$app/forms'
 	import { theme } from '$lib/stores/theme'
-	import { Auth } from 'aws-amplify'
+	import { Auth, DataStore } from 'aws-amplify'
 	import { goto } from '$app/navigation'
 
 	let themeOptions = ['light', 'dark', 'cupcake', 'aqua', 'dracula', 'winter']
@@ -15,11 +15,15 @@
 	let localUser
 	console.log('About to try and authenticate user...')
 	Auth.currentAuthenticatedUser()
-		.then((user) => (localUser = user))
+		.then((user) => {
+			console.log('User is authenticated...', user.attributes.email)
+			localUser = user
+		})
 		.catch((err) => console.log('Checking for user... ', err))
 
 	async function logout() {
 		try {
+			await DataStore.clear()
 			await Auth.signOut()
 			goto('/')
 		} catch (error) {
