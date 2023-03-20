@@ -75,15 +75,13 @@
 			await DataStore.delete(skillToDelete[0]) // delete the first item in the array
 		}
 	}
-	const deleteAllSkills = async () => {
-		await DataStore.delete(Skill, Predicates.ALL)
-	}
+	
 </script>
 
 <div>
 	<button class="btn btn-primary m-2" class:btn-disabled="{selectedSkills.length === 0}" on:click={findOrCreateSkill}>Add Selected Items to DataStore</button>
 	<button class="btn btn-primary m-2" class:btn-disabled="{selectedSkills.length === 0}" on:click={deleteSelectedSkills}>Delete Selected Items</button>
-	<button class="btn btn-primary m-2" on:click={deleteAllSkills}>Delete all Items</button>
+
 </div>
 <table class="table w-full overflow-y-auto">
 	<thead>

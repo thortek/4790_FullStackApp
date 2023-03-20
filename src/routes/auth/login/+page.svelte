@@ -1,6 +1,6 @@
 <script>
 	import { goto } from '$app/navigation'
-	import { Auth } from 'aws-amplify'
+	import { DataStore, Auth } from 'aws-amplify'
 
     const credentials = {
         email: '',

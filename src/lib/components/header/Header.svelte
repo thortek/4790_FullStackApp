@@ -1,7 +1,7 @@
 <script>
 	import { enhance } from '$app/forms'
 	import { theme } from '$lib/stores/theme'
-	import { Auth } from 'aws-amplify'
+	import { DataStore, Auth } from 'aws-amplify'
 	import { goto } from '$app/navigation'
 
 	let themeOptions = ['light', 'dark', 'cupcake', 'aqua', 'dracula', 'winter']
@@ -15,12 +15,16 @@
 	let localUser
 	console.log('About to try and authenticate user...')
 	Auth.currentAuthenticatedUser()
-		.then((user) => (localUser = user))
-		.catch((err) => console.log('Checking for user... ', err))
+		.then((user) => {
+			console.log(`User ${user.attributes.name} authenticated.`)
+			localUser = user})
+		.catch((err) => console.log(err))
 
 	async function logout() {
 		try {
+			await DataStore.clear()
 			await Auth.signOut()
+			console.log(`User ${localUser.attributes.name} signed out.`)
 			goto('/')
 		} catch (error) {
 			console.log('error signing out: ', error)
@@ -48,6 +52,9 @@
 		<a href="/movies" class="btn btn-ghost normal-case text-xl">Movies</a>
 		<a href="/dashboard" class="btn btn-ghost normal-case text-xl">Dashboard</a>
 		<a href="/aggregator" class="btn btn-ghost normal-case text-xl">News Aggregator</a>
+		{#if localUser}
+			<h4>Welcome {localUser.attributes.name}! Logged in as: {localUser.attributes.email}</h4>
+		{/if}
 	</div>
 	<div>
 		<form method="POST" action="/movies?/search" use:enhance>
@@ -71,9 +78,6 @@
 		<ul
 			tabindex="0"
 			class="mt-3 p-2 dropdown-content bg-base-100 menu menu-compact shadow rounded-box w-36">
-			{#if localUser}
-				<li>Welcome {localUser.attributes.name}!</li>
-			{/if}
 			<li><a href="/user/profile">Profile</a></li>
 			<li><a href="/user/settings">Settings</a></li>
 			<li>
@@ -86,7 +90,9 @@
 					{/each}
 				</select>
 			</li>
-			<li><a on:click={logout}>Logout</a></li>
+			<li>
+				<a on:click={logout}>Logout</a>
+			</li>
 		</ul>
 	</div>
 </header>
