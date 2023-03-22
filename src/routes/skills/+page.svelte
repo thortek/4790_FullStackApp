@@ -69,6 +69,8 @@
 				<td>{skill.name}</td>
 				<td>{skill.id}</td>
 			</tr>
+			{:else}
+			<h3>loading...</h3>
 		{/each}
 	</tbody>
 </table>
