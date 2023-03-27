@@ -5,14 +5,21 @@
 
 	let skills = []
 	let selectedSkills = []
+	let allSynced = false
 	$: allSelected = selectedSkills.length === skills.length
 
 	onMount(async () => {
-		skills = await DataStore.query(Skill)
-		console.log(skills)
+		//skills = await DataStore.query(Skill)
+		//console.log(skills)
+		DataStore.observeQuery(Skill).subscribe((snapshot) => {
+			const { items, isSynced } = snapshot
+			skills = items
+			allSynced = isSynced
+			console.log(`[Snapshot] item count: ${items.length}, isSynced: ${isSynced}`)
+		})
 	})
 
-    const toggleAll = () => {
+	const toggleAll = () => {
 		if (allSelected) {
 			selectedSkills = [] // uncheck all
 		} else {
@@ -24,23 +31,22 @@
 		for (let skill of selectedSkills) {
 			const skillToDelete = await DataStore.query(Skill, (c) => c.sourcedId.eq(skill.id))
 			console.log(skillToDelete)
-            if(skillToDelete.length === 0) {
-                console.log('skill not found in DataStore')
-                return
-            } else {
-                console.log('skill found in DataStore')
-                await DataStore.delete(skillToDelete[0]) // delete the first item in the array
-            }
-			
+			if (skillToDelete.length === 0) {
+				console.log('skill not found in DataStore')
+				return
+			} else {
+				console.log('skill found in DataStore')
+				await DataStore.delete(skillToDelete[0]) // delete the first item in the array
+			}
 		}
 	}
 	const deleteAllSkills = async () => {
-        try {
-            await DataStore.delete(Skill, Predicates.ALL)
-        } catch (error) {
-            console.log(error)
+		try {
+			await DataStore.delete(Skill, Predicates.ALL)
+		} catch (error) {
+			console.log(error)
+		}
 	}
-}
 </script>
 
 <div>
@@ -63,14 +69,17 @@
 		</tr>
 	</thead>
 	<tbody>
+		{#if !allSynced}
+			<h3>Loading...</h3>
+		{/if}
 		{#each skills as skill}
 			<tr>
 				<td><input type="checkbox" bind:group={selectedSkills} value={skill} /></td>
 				<td>{skill.name}</td>
 				<td>{skill.id}</td>
 			</tr>
-			{:else}
-			<h3>loading...</h3>
+		{:else}
+			<h3>0 skills found</h3>
 		{/each}
 	</tbody>
 </table>
