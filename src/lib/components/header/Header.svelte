@@ -13,6 +13,7 @@
 	$: if (selectedTheme && selectedTheme !== 'Theme') $theme = selectedTheme
 
 	let localUser
+
 	console.log('About to try and authenticate user...')
 	Auth.currentAuthenticatedUser()
 		.then((user) => {
@@ -21,13 +22,19 @@
 		})
 		.catch((err) => console.log('Checking for user... ', err))
 
-	async function logout() {
-		try {
-			await DataStore.clear()
-			await Auth.signOut()
-			goto('/')
-		} catch (error) {
-			console.log('error signing out: ', error)
+	async function logInOut() {
+		if (localUser) {
+			try {
+				await Auth.signOut()
+				//if (DataStore.state === 'Running') await DataStore.clear()
+				await DataStore.clear()
+				localUser = null
+				goto('/')
+			} catch (error) {
+				console.log('error signing out: ', error)
+			}
+		} else {
+			goto('/auth/login')
 		}
 	}
 </script>
@@ -52,28 +59,21 @@
 		<a href="/movies" class="btn btn-ghost normal-case text-xl">Movies</a>
 		<a href="/dashboard" class="btn btn-ghost normal-case text-xl">Dashboard</a>
 		<a href="/aggregator" class="btn btn-ghost normal-case text-xl">News Aggregator</a>
-		<p>{#if localUser}
+		<a href="/skills" class="btn btn-ghost normal-case text-xl">Skills</a>
+		<!-- 		<p>{#if localUser}
 			{localUser.attributes.email}
-		{/if}</p>
+		{/if}</p> -->
 	</div>
-	<div>
-		<form method="POST" action="/movies?/search" use:enhance>
-			<div class="form-control">
-				<input
-					class="input input-bordered input-lg w-80"
-					type="search"
-					name="searchTerms"
-					placeholder="Movie Search" />
-			</div>
-		</form>
-	</div>
+
 	<div class="dropdown dropdown-end">
 		<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-		<label tabindex="0" class="btn btn-ghost btn-circle avatar m-1" for="userIcon">
-			<div class="w-16 rounded-full">
-				<img id="userIcon" src="https://placeimg.com/90/90/people" alt="User icon" />
+		<!-- svelte-ignore a11y-label-has-associated-control -->
+
+		<div class="avatar placeholder" class:online={localUser}>
+			<div class="bg-neutral-focus text-neutral-content rounded-full w-16">
+				<label tabindex="0" class="btn m-1">{localUser?.attributes?.name ?? '?'}</label>
 			</div>
-		</label>
+		</div>
 		<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 		<ul
 			tabindex="0"
@@ -93,7 +93,7 @@
 					{/each}
 				</select>
 			</li>
-			<li><a on:click={logout}>Logout</a></li>
+			<li><a on:click={logInOut}>{localUser ? 'Logout' : 'Login'}</a></li>
 		</ul>
 	</div>
 </header>

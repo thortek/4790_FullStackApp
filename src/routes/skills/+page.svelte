@@ -1,7 +1,8 @@
 <script>
 	import { onMount } from 'svelte'
-	import { DataStore, Predicates } from 'aws-amplify'
+	import { Auth, DataStore, Predicates } from 'aws-amplify'
 	import { Skill } from '../../models'
+	import { goto } from '$app/navigation'
 
 	let skills = []
 	let selectedSkills = []
@@ -9,14 +10,19 @@
 	$: allSelected = selectedSkills.length === skills.length
 
 	onMount(async () => {
-		//skills = await DataStore.query(Skill)
-		//console.log(skills)
-		DataStore.observeQuery(Skill).subscribe((snapshot) => {
+		try {
+			const user = await Auth.currentAuthenticatedUser()
+			console.log('User is authenticated...', user.attributes.email)
+			DataStore.observeQuery(Skill).subscribe((snapshot) => {
 			const { items, isSynced } = snapshot
 			skills = items
 			allSynced = isSynced
 			console.log(`[Snapshot] item count: ${items.length}, isSynced: ${isSynced}`)
 		})
+		} catch (err) {
+			console.log('Checking for user... ', err)
+			goto('/auth/login')
+		}
 	})
 
 	const toggleAll = () => {

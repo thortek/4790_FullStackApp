@@ -1,12 +1,19 @@
 <script>
 	import '../app.css'
 	import { theme } from '$lib/stores/theme'
-	import { Amplify, AuthModeStrategyType } from 'aws-amplify'
+	import { onMount } from 'svelte'
+	import { Skill } from '../models'
+	import { Amplify, AuthModeStrategyType, DataStore } from 'aws-amplify'
 	import awsconfig from '../aws-exports'
 	Amplify.configure({
 		...awsconfig,
 		DataStore: { authModeStrategyType: AuthModeStrategyType.MULTI_AUTH }
 	})
+	
+	onMount(async () => {
+		await DataStore.start(Skill)
+	})
+	
 </script>
 
 <div data-theme={$theme}>
