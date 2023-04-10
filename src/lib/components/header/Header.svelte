@@ -12,7 +12,7 @@
 
 	$: if (selectedTheme && selectedTheme !== 'Theme') $theme = selectedTheme
 
-	let localUser
+	let localUser = null
 
 	console.log('About to try and authenticate user...')
 	Auth.currentAuthenticatedUser()
@@ -59,10 +59,10 @@
 		<a href="/movies" class="btn btn-ghost normal-case text-xl">Movies</a>
 		<a href="/dashboard" class="btn btn-ghost normal-case text-xl">Dashboard</a>
 		<a href="/aggregator" class="btn btn-ghost normal-case text-xl">News Aggregator</a>
-		<a href="/skills" class="btn btn-ghost normal-case text-xl">Skills</a>
-		<!-- 		<p>{#if localUser}
-			{localUser.attributes.email}
-		{/if}</p> -->
+		
+		{#if localUser}
+			<a href="/skills" class="btn btn-ghost normal-case text-xl">Skills</a>
+		{/if}
 	</div>
 
 	<div class="dropdown dropdown-end">
