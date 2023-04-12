@@ -1,0 +1,14 @@
+{
+  "resourceName": "s34790backendstorage2fd5fd5f",
+  "bucketName": "4790-backend-storage-2fd5fd5f",
+  "policyUUID": "e8907703",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ]
+}

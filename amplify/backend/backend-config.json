@@ -81,7 +81,7 @@
     }
   },
   "storage": {
-    "4790Images": {
+    "s34790backendstorage2fd5fd5f": {
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "S3"
