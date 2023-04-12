@@ -1,6 +1,7 @@
 <script>
 	import { goto } from '$app/navigation'
 	import { Auth } from 'aws-amplify'
+	import { localUser } from '$lib/stores/localUser'
 
     const credentials = {
         email: '',
@@ -9,8 +10,8 @@
 
 	const handleSubmit = async () => {
 		try {
-			const user = await Auth.signIn(credentials.email, credentials.password)
-			console.log('Login appears to have worked...', user)
+			$localUser = await Auth.signIn(credentials.email, credentials.password)
+			console.log('Login appears to have worked...')
 			goto('/avatars')
 		} catch (err) {
 			console.log(err)

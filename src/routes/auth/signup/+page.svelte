@@ -20,7 +20,7 @@
 	const handleSubmit = async () => {
 		console.log('About to submit signup data...')
 		try {
-        const { user } = await Auth.signUp({
+        $localUser = await Auth.signUp({
             username: credentials.email,
             password: credentials.password,
             attributes: {
@@ -32,8 +32,6 @@
                 enabled: true,
             }
         })
-        console.log(user)
-        $localUser = credentials.email
 		// go to verification route on success
         goto('/auth/verify')
     } catch (error) {

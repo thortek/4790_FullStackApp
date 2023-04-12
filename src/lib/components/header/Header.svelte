@@ -71,7 +71,7 @@
 		<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 		<!-- svelte-ignore a11y-label-has-associated-control -->
 
-		<div class="avatar placeholder" class:online={$localUser}>
+		<div class="avatar placeholder" class:online={localUser}>
 			<div class="bg-neutral-focus text-neutral-content rounded-full w-16">
 				<label tabindex="0" class="btn m-1">{$localUser?.attributes?.name ?? '?'}</label>
 			</div>
