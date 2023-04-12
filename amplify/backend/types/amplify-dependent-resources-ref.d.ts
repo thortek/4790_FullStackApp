@@ -19,5 +19,11 @@ export type AmplifyDependentResourcesAttributes = {
     "userPoolGroups": {
       "adminGroupRole": "string"
     }
+  },
+  "storage": {
+    "4790Images": {
+      "BucketName": "string",
+      "Region": "string"
+    }
   }
 }

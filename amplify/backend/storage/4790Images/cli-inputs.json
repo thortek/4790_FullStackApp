@@ -1,0 +1,11 @@
+{
+  "resourceName": "4790Images",
+  "policyUUID": "9f34fca8",
+  "bucketName": "4790backendbucket",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE"
+  ],
+  "triggerFunction": "NONE"
+}

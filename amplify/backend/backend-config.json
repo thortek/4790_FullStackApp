@@ -79,5 +79,12 @@
       "providerPlugin": "awscloudformation",
       "service": "Cognito-UserPool-Groups"
     }
+  },
+  "storage": {
+    "4790Images": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
+    }
   }
 }

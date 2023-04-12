@@ -3,6 +3,7 @@
 	import { theme } from '$lib/stores/theme'
 	import { Auth, DataStore } from 'aws-amplify'
 	import { goto } from '$app/navigation'
+	import { localUser } from '$lib/stores/localUser'
 
 	let themeOptions = ['light', 'dark', 'cupcake', 'aqua', 'dracula', 'winter']
 
@@ -12,15 +13,16 @@
 
 	$: if (selectedTheme && selectedTheme !== 'Theme') $theme = selectedTheme
 
-	let localUser = null
-
 	console.log('About to try and authenticate user...')
 	Auth.currentAuthenticatedUser()
 		.then((user) => {
 			console.log('User is authenticated...', user.attributes.email)
-			localUser = user
+			$localUser = user
 		})
-		.catch((err) => console.log('Checking for user... ', err))
+		.catch((err) => {
+			console.log(err)
+			$localUser = null
+		})
 
 	async function logInOut() {
 		if (localUser) {
@@ -28,7 +30,7 @@
 				await Auth.signOut()
 				//if (DataStore.state === 'Running') await DataStore.clear()
 				await DataStore.clear()
-				localUser = null
+				$localUser = null
 				goto('/')
 			} catch (error) {
 				console.log('error signing out: ', error)
@@ -60,7 +62,7 @@
 		<a href="/dashboard" class="btn btn-ghost normal-case text-xl">Dashboard</a>
 		<a href="/aggregator" class="btn btn-ghost normal-case text-xl">News Aggregator</a>
 		
-		{#if localUser}
+		{#if $localUser}
 			<a href="/skills" class="btn btn-ghost normal-case text-xl">Skills</a>
 		{/if}
 	</div>
@@ -69,17 +71,17 @@
 		<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 		<!-- svelte-ignore a11y-label-has-associated-control -->
 
-		<div class="avatar placeholder" class:online={localUser}>
+		<div class="avatar placeholder" class:online={$localUser}>
 			<div class="bg-neutral-focus text-neutral-content rounded-full w-16">
-				<label tabindex="0" class="btn m-1">{localUser?.attributes?.name ?? '?'}</label>
+				<label tabindex="0" class="btn m-1">{$localUser?.attributes?.name ?? '?'}</label>
 			</div>
 		</div>
 		<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 		<ul
 			tabindex="0"
 			class="mt-3 p-2 dropdown-content bg-base-100 menu menu-compact shadow rounded-box w-36">
-			{#if localUser}
-				<li>Welcome {localUser.attributes.name}!</li>
+			{#if $localUser}
+				<li>Welcome {$localUser.attributes.name}!</li>
 			{/if}
 			<li><a href="/user/profile">Profile</a></li>
 			<li><a href="/user/settings">Settings</a></li>
@@ -93,7 +95,9 @@
 					{/each}
 				</select>
 			</li>
-			<li><a on:click={logInOut}>{localUser ? 'Logout' : 'Login'}</a></li>
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<!-- svelte-ignore a11y-missing-attribute -->
+			<li><a on:click={logInOut}>{$localUser ? 'Logout' : 'Login'}</a></li>
 		</ul>
 	</div>
 </header>

@@ -18,6 +18,9 @@
       },
       "api": {
         "4790backend": {}
+      },
+      "storage": {
+        "4790Images": {}
       }
     }
   }
