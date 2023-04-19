@@ -18,16 +18,16 @@
 		Auth.currentAuthenticatedUser()
 		.then(async (user) => {
 			console.log('User is authenticated as', user.attributes.email)
-			$localUser = user
 			try {
 				const imageFile = await Storage.list('profilePic/', { level: 'protected', pageSize: 1})
 				//console.log(imageFile)
 				const signedURL = await Storage.get(imageFile.results[0].key, { level: 'protected' })
 				//console.log(signedURL)
-				$localUser.attributes.profilePic = signedURL
+				user.attributes.picture = signedURL
 			} catch (err) {
 				console.log('It is likely that the user has not yet uploaded a profile pic.', err)
 			}
+			$localUser = user
 		})
 		.catch((err) => {
 			console.log(err)
@@ -36,12 +36,12 @@
 	})
 	
 	async function logInOut() {
-		if (localUser) {
+		if ($localUser) {
 			try {
 				await Auth.signOut()
 				//if (DataStore.state === 'Running') await DataStore.clear()
 				await DataStore.clear()
-				localUser = null
+				$localUser = null
 				goto('/')
 			} catch (error) {
 				console.log('error signing out: ', error)
@@ -84,8 +84,8 @@
 
 		<div class="avatar" class:online={$localUser}>
 			<div class="bg-neutral-focus text-neutral-content rounded-xl w-24">
-				{#if $localUser?.attributes?.profilePic}
-				<img src={$localUser?.attributes?.profilePic} alt='Profile Pic of User' tabIndex="0"/>
+				{#if $localUser?.attributes?.picture}
+				<img src={$localUser?.attributes?.picture} alt='Profile Pic of User' tabIndex="0"/>
 				{:else}
 				<label tabindex="0" class="block w-full h-full text-center">{$localUser?.attributes?.name ?? 'Login'}</label>
 				{/if}
@@ -114,4 +114,4 @@
 	</div>
 </header>
 
-<ProfilePicModal isModalOpen={open}/>
+<ProfilePicModal isModalOpen={open} imagePath='profilePic/' folderLevel='protected' multipleItems='false'/>

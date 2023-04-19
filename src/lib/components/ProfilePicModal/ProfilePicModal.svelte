@@ -2,17 +2,20 @@
 	import { Storage } from 'aws-amplify'
 
 	export let isModalOpen
+	export let imagePath
+	export let folderLevel
+	export let multipleItems
 	
 	let files = []
 
 	async function submitHandler() {
 		try {
-            const previousPics = await Storage.list('profilePic/', { level: 'protected', pageSize: 1 })
+            const previousPics = await Storage.list(imagePath, { level: folderLevel, pageSize: 1 })
 			console.log(previousPics)
-			if (previousPics.results.length > 0) {
-				await Storage.remove(previousPics.results[0].key, { level: 'protected' })
+			if ( multipleItems === 'false' && previousPics.results.length > 0) {
+				await Storage.remove(previousPics.results[0].key, { level: folderLevel })
 			}
-			await Storage.put(`profilePic/${files[0].name}`, files[0], {level: 'protected'})
+			await Storage.put(`${imagePath}${files[0].name}`, files[0], {level: folderLevel})
 		} catch (err) {
 			console.log(err)
 		}

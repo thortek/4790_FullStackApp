@@ -3,11 +3,13 @@
 	import { Auth, DataStore, Predicates } from 'aws-amplify'
 	import { Skill } from '../../models'
 	import { goto } from '$app/navigation'
+	import ProfilePicModal from '$lib/components/ProfilePicModal/ProfilePicModal.svelte';
 
 	let skills = []
 	let selectedSkills = []
 	let allSynced = false
 	$: allSelected = selectedSkills.length === skills.length
+	let open = false
 
 	onMount(async () => {
 		try {
@@ -53,6 +55,10 @@
 			console.log(error)
 		}
 	}
+
+	const uploadToS3 = async (file) => {
+		open = !open
+	}
 </script>
 
 <div>
@@ -81,6 +87,7 @@
 		{#each skills as skill}
 			<tr>
 				<td><input type="checkbox" bind:group={selectedSkills} value={skill} /></td>
+				<td><div class="btn" on:click={uploadToS3}>Upload Image</div></td>
 				<td>{skill.name}</td>
 				<td>{skill.id}</td>
 			</tr>
@@ -89,3 +96,5 @@
 		{/each}
 	</tbody>
 </table>
+
+<ProfilePicModal isModalOpen={open} imagePath='skillImages/' folderLevel='public' multipleItems='true'/>
