@@ -1,8 +1,17 @@
 <script>
   import { goto } from '$app/navigation'
+  import { Auth } from 'aws-amplify'
+  //import { onMount } from 'svelte'
 
-  function navigate() {
-    goto('/dashboard')
+  async function navigate() {
+    try {
+      const user = await Auth.currentAuthenticatedUser()
+      console.log('User is authenticated...', user.attributes.email)
+      goto('/dashboard')
+    } catch (err) {
+      console.log('Checking for user... ', err)
+      goto('/auth/login')
+    }
   }
 </script>
 

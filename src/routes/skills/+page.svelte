@@ -15,6 +15,7 @@
 		try {
 			const user = await Auth.currentAuthenticatedUser()
 			console.log('User is authenticated...', user.attributes.email)
+			await DataStore.start(Skill) // best way to force a sync to the cloud?
 			DataStore.observeQuery(Skill).subscribe((snapshot) => {
 			const { items, isSynced } = snapshot
 			skills = items
